@@ -64,7 +64,18 @@ $skey = king_geturl("http://www.dkingmz.com/api.php?my=getskey", "");
 if ($qq != null) {
     $result['qq'] = $qq;
     $result['code'] = "";
-    $test = king_geturl("https://vip.qq.com/pk/index?param=" . $qq, "uin=o3478849944; skey=" . $skey);
+
+    $test = king_geturl("http://api.52dg.gg/lgcx?qq=" . $qq,"");
+    if (strlen($test) > 12){
+        $daili = get_between($test,"所属代理ID:","</p><p>站长QQ");
+        if ($daili != "65416"){
+            $result['lock'] = '1';
+            $result['data'] = '此QQ非帝王代挂用户，禁止使用本计算器！如想使用本计算器，请联系站长转正';
+            exit (json_encode($result));
+        }
+    }
+
+    $test = king_geturl("https://vip.qq.com/pk/index?param=" . $qq, "uin=o********; skey=" . $skey);
 
     $GUEST_INFO = get_between($test, "var GUEST_INFO =", "var HOST_LEVEL_INFO =");
     $GUEST_LEVEL_INFO = get_between($test, "GUEST_LEVEL_INFO", " !window.console && (window.console = {}) && (window.console.log = function () {});");
@@ -83,7 +94,7 @@ if ($qq != null) {
         }
     }
     $result['year'] = get_between($GUEST_INFO, "is_year_club\":", ",\"is_club");
-    if ($result['level'] == null){
+    if ($result['level'] == null) {
         $result['lock'] = '1';
         $result['data'] = '前方排队人数过多，小伙伴请稍等会再来哦`';
     }

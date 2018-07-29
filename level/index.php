@@ -1,17 +1,37 @@
 <?php
 $conf['qqjump'] = 1;
 if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1) {
-    $a = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+    $a = 'https://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
     echo '<!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>请右上角用浏览器打开</title>
-    <script src="https://open.mobile.qq.com/sdk/qqapi.js?_bid=152"></script>
-    <script type="text/javascript"> mqq.ui.openUrl({ target: 2,url: "' . $a . '"}); </script>
-</head>
-<body> </body>
-</html>';
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>右上角选择浏览器打开</title>
+  <script src="https://open.mobile.qq.com/sdk/qqapi.js?_bid=152"></script>
+  <script type="text/javascript"> mqq.ui.openUrl({ target: 2,url: "https://www.dkingdg.com/level"}); </script>
+  
+ </head>
+ <body>
+ <center><h1>为了您更好的浏览体验，已为您启用外置浏览器打开</h1></center><br>
+ <center><h1>若未成功跳转，请点击右上角选择浏览器打开</h1></center><br>
+<center><h1><a href=\'mttbrowser://url=https://www.dkingdg.com/level\' id="bt_1" style="display: none" >点击我跳转[QQ浏览器用户]</a></h1></center><br>
+<center><h1><a href=\'ucbrowser://https://www.dkingdg.com/level\' id="bt_2" style="display: none" >点击我跳转[UC浏览器用户]</a></h1></center><br>
+<center><h1><a href=\'googlechrome://www.dkingdg.com/level\' id="bt_3" style="display: none" >点击我跳转[Chrome浏览器用户]</a></h1></center><br>
+<center><h1><a href=\'baiduboxapp://browse?url=https://www.dkingdg.com/level\' id="bt_4" style="display: none" >点击我跳转[百度客户端用户]</a></h1></center><br>
+</body>
+</html><script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+        setTimeout(function () {
+            //QQ浏览器
+            document.getElementById("bt_1").click();
+            //UC浏览器
+            document.getElementById("bt_2").click();
+            //Chrome浏览器
+            document.getElementById("bt_3").click();
+            //百度客户端
+            document.getElementById("bt_4").click();
+        }, 1);
+</script>';
     exit;
 }
 ?>
@@ -126,7 +146,8 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
             <br>
             <center>
                 <small>
-                    <p class="btn btn-xs btn-default"><a data-toggle="modal" data-target="#speed_Modal">【怎么查看"升级速度"】</a></p>
+                    <p class="btn btn-xs btn-default"><a data-toggle="modal" data-target="#speed_Modal">【怎么查看"升级速度"】</a>
+                    </p>
             </center>
             <div style="display: none">
                 <br>
@@ -167,7 +188,7 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
             <button id="bt_sumbit" type="button" class="btn btn-success btn-block">提交计算
             </button>
             <button type="button" class="btn btn-primary btn-block"
-                    onclick="window.location.href('https://www.dkingdg.com/')">
+                    onclick="urlFun()">
                 立即代挂
             </button>
             <br>
@@ -198,8 +219,11 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
                                         id="now_level">64</span></font></td>
                     </tr>
                     <tr height="25">
-                        <td class="col-xs-4 col-sm-4" align="center"><font color="#808080">升级速度</font></td>
-                        <td class="col-xs-8 col-sm-8" align="center"><font color="#808080"><span id="now_speed">1</span>
+                        <td class="col-xs-4 col-sm-4" align="center"><font color="#808080">
+                                <div style="font-weight:bold">升级速度</div>
+                            </font></td>
+                        <td class="col-xs-8 col-sm-8" align="center"><font color="#808080">
+                                <div style="font-weight:bold"><span id="now_speed">1</span></div>
                             </font></td>
                     </tr>
                     <tr height="25">
@@ -208,16 +232,22 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
                                         id="target_level">64</span> </font></td>
                     </tr>
                     <tr height="25">
-                        <td class="col-xs-4 col-sm-4" align="center"><font color="#808080">所需天数</font></td>
-                        <td class="col-xs-8 col-sm-8" align="center"><font color="#808080"><span
-                                        id="spend_day">100</span></font></td>
+                        <td class="col-xs-4 col-sm-4" align="center">
+                            <div style="font-weight:bold"><font color="#808080">所需天数</font></div>
+                        </td>
+                        <td class="col-xs-8 col-sm-8" align="center"><font color="#808080">
+                                <div style="font-weight:bold"><span
+                                            id="spend_day">100</span></div>
+                            </font></td>
                     </tr>
                     </tbody>
                 </table>
                 <table style="margin-top: -21px;font-size: 15px" class="table table-bordered">
                     <tbody>
                     <tr height="10">
-                        <td class="col-xs-12 col-sm-12" align="center"><font color="#1E90FF">使用代挂提速后：</font>
+                        <td class="col-xs-12 col-sm-12" align="center"><font color="#1E90FF">
+                                <div style="font-weight:bold">使用代挂提速后：</div>
+                            </font>
                         </td>
                     </tr>
                     </tbody>
@@ -225,14 +255,24 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
                 <table style="margin-top: -21px;" class="table table-bordered">
                     <tbody>
                     <tr height="25">
-                        <td class="col-xs-4 col-sm-4" align="center"><font color="#808080">升级速度</font></td>
-                        <td class="col-xs-8 col-sm-8" align="center"><font color="#1E90FF"><span
-                                        id="up_now_speed">1</span> </font></td>
+                        <td class="col-xs-4 col-sm-4" align="center">
+                            <div style="font-weight:bold"><font color="#808080">升级速度</font></div>
+                        </td>
+                        <td class="col-xs-8 col-sm-8" align="center"><font color="#1E90FF">
+                                <div style="font-weight:bold"><span
+                                            id="up_now_speed">1</span>以上
+                                </div>
+                            </font></td>
                     </tr>
                     <tr height="25">
-                        <td class="col-xs-4 col-sm-4" align="center"><font color="#808080">所需天数</font></td>
-                        <td class="col-xs-8 col-sm-8" align="center"><font color="#1E90FF"><span
-                                        id="up_spend_day">100</span></font></td>
+                        <td class="col-xs-4 col-sm-4" align="center">
+                            <div style="font-weight:bold"><font color="#808080">所需天数</font></div>
+                        </td>
+                        <td class="col-xs-8 col-sm-8" align="center"><font color="#1E90FF">
+                                <div style="font-weight:bold"><span
+                                            id="up_spend_day">100</span>天以下
+                                </div>
+                            </font></td>
                     </tr>
                     </tbody>
                 </table>
@@ -338,7 +378,12 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
 
 <script src="//lib.baomitu.com/layer/2.3/layer.js"></script>
 </body>
+
 <script>
+    function urlFun() {
+        window.location.href = "https://www.dkingdg.com/";
+    }
+
     $("#cqq").blur(function () {
         var qq = $("#cqq").val();
         if (!(qq == "")) {
@@ -348,10 +393,12 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
                 url: "https://www.dkingdg.com/qqlevel.php?qq=" + qq,
                 dataType: "json",
                 error: function () {
-
                 },
                 data: {},
                 success: function (data) {
+                    if (data.lock.length != 0) {
+                        alert(data.data);
+                    }
                     $("#qqday").val(data.nday);
                     if (data.svip != "0") {
                         $("input[name='Check_vip']").get(0).checked = true;
@@ -374,14 +421,12 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
             });
         }
     });
-
     // 基础活跃上限
     var jc_speed = 2.2;
     // 服务活跃上限
     var fw_speed = 1.6;
     //  服务活跃上限
     var fw_speed1 = 2.0;
-
     var check_vip_sign = 0;
     $(document).ready(function () {
         $("#is_vip").click(function () {
@@ -413,15 +458,14 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
                 $("#ulevel").focus();
                 return false;
             }
-            var newday = ulevel * ulevel + 4 * ulevel;
-            var level = Math.round(Math.sqrt(qqday + 4) - 2);
-            var jday = Math.round((newday - qqday) / uday);
+            var newday = ulevel * ulevel + 4 * ulevel; //预期等级总天数
+            var level = Math.round(Math.sqrt(qqday + 4) - 2);  //现在的等级
+            var jday = Math.round((newday - qqday) / uday);  //预期等级需要天数
             if (jday <= 0) {
-                alert("预期等级不可低于您现在的等级");
+                alert("您现在已经有" + ulevel + "级了，预期等级不可低于您现在的等级哦~");
                 return;
             }
             var vip_jichu_speed = 0;
-
             $("#p_qq").text(cqq);
             $("#now_level").text(level);
             $("#now_speed").text(uday);
@@ -431,38 +475,29 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
             // 会员基础速度官方表单：http://vip.qq.com/freedom/freedom_vipgrade.html
             if ($("input[name='Check_vip']:checked").val() == 0) {
                 // 判断有无会员
-
-                var novip_sudu = jc_speed * 1 + fw_speed;
+                var novip_sudu = jc_speed * 1 + fw_speed; //常规代挂无VIP速度
                 novip_sudu = novip_sudu.toFixed(1);
-
-                var novip_sudu1 = jc_speed * 1 + fw_speed1;
+                var novip_sudu1 = jc_speed * 1 + fw_speed1; //任务上限无VIP速度
                 novip_sudu1 = novip_sudu1.toFixed(1);
-
-                var novip_jday = Math.round((newday - qqday) / novip_sudu);
+                var novip_jday = Math.round((newday - qqday) / novip_sudu); //常规代挂无VIP速度 - 所需天数
                 novip_jday = novip_jday.toFixed(0);
-
-                var novip_jday1 = Math.round((newday - qqday) / novip_sudu1);
+                var novip_jday1 = Math.round((newday - qqday) / novip_sudu1); //任务上限无VIP速度 - 所需天数
                 novip_jday1 = novip_jday1.toFixed(0);
-
-
-                if (novip_jday1 > jday) {
-                    alert("速度不符合实际，请如实填写！")
+                if (uday > novip_sudu1) {
+                    alert("小伙子要如实填写自己的速度哦~");
                     return;
-                } else if (novip_jday > jday) {
+                }
+                if (uday > (novip_sudu - 0.5)) {
+                    // 达到常规速度-0.5天 即判断为代挂
                     $("#Check_dg").attr('src', './img/is_dg.png');
-                    $("#vip_level").attr('src', './img/no_vip.png');
-                    $('#up_now_speed').text(novip_sudu1);
-                    $('#up_spend_day').text(novip_jday1);
                 } else {
-                    // 判断实际速度与代挂速度相等则为代挂中
-                    if (novip_jday == jday) {
-                        $("#Check_dg").attr('src', './img/is_dg.png');
-                    } else {
-                        $("#Check_dg").attr('src', './img/no_dg.png');
-                    }
-                    $("#vip_level").attr('src', './img/no_vip.png');
-                    $('#up_now_speed').text(novip_sudu);
-                    $('#up_spend_day').text(novip_jday);
+                    $("#Check_dg").attr('src', './img/no_dg.png');
+                }
+                $('#up_now_speed').text(novip_sudu);
+                $('#up_spend_day').text(novip_jday);
+                if (uday > novip_sudu) {
+                    $('#up_now_speed').text(uday);
+                    $('#up_spend_day').text(jday);
                 }
             } else {
                 if ($('#Check_S').val() == 1) {
@@ -582,36 +617,47 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') !== false && $conf['qqjump'] == 1
                         }
                     }
                 }
-                var new_uday = (vip_jichu_speed * jc_speed + fw_speed);
+                var new_uday = (vip_jichu_speed * jc_speed + fw_speed); //常规代挂VIP速度
                 new_uday = new_uday.toFixed(1);
-
-                var isvip_jday = Math.round((newday - qqday) / new_uday);
-                isvip_jday = isvip_jday.toFixed(0)
-
-
-                var new_uday1 = (vip_jichu_speed * jc_speed + fw_speed1);
+                var new_uday1 = (vip_jichu_speed * jc_speed + fw_speed1); //任务上限VIP速度
                 new_uday1 = new_uday1.toFixed(1);
-
-                var isvip_jday1 = Math.round((newday - qqday) / new_uday1);
-                isvip_jday1 = isvip_jday1.toFixed(0)
-
-
-                if (isvip_jday1 > jday) {
-                    alert("速度不符合实际，请如实填写！")
+                var isvip_jday = Math.round((newday - qqday) / new_uday); //常规代挂VIP速度 - 所需天数
+                isvip_jday = isvip_jday.toFixed(0)
+                var isvip_jday1 = Math.round((newday - qqday) / new_uday1); //任务上限VIP速度 - 所需天数
+                isvip_jday1 = isvip_jday1.toFixed(0);
+                if (uday > new_uday1) {
+                    alert("小伙子要如实填写自己的速度哦~");
                     return;
-                } else if (isvip_jday > jday) {
-                    $("#Check_dg").attr('src', './img/is_dg.png');
-                    $('#up_now_speed').text(new_uday1);
-                    $('#up_spend_day').text(isvip_jday1);
-                } else {
-                    if (isvip_jday == jday) {
-                        $("#Check_dg").attr('src', './img/is_dg.png');
-                    } else {
-                        $("#Check_dg").attr('src', './img/no_dg.png');
-                    }
-                    $('#up_now_speed').text(new_uday);
-                    $('#up_spend_day').text(isvip_jday);
                 }
+                if (uday > (new_uday - 0.5)) {
+                    // 达到常规速度-0.5天 即判断为代挂中
+                    $("#Check_dg").attr('src', './img/is_dg.png');
+                } else {
+                    $("#Check_dg").attr('src', './img/no_dg.png');
+                }
+                $('#up_now_speed').text(new_uday);
+                $('#up_spend_day').text(isvip_jday);
+                if (uday > new_uday) {
+                    $('#up_now_speed').text(uday);
+                    $('#up_spend_day').text(jday);
+                }
+
+                // if (isvip_jday1 > jday) {
+                //     // alert("速度不符合实际，请如实填写！")
+                //     // return;
+                // } else if (isvip_jday > jday) {
+                //     $("#Check_dg").attr('src', './img/is_dg.png');
+                //     $('#up_now_speed').text(new_uday1);
+                //     $('#up_spend_day').text(isvip_jday1);
+                // } else {
+                //     if (isvip_jday == jday) {
+                //         $("#Check_dg").attr('src', './img/is_dg.png');
+                //     } else {
+                //         $("#Check_dg").attr('src', './img/no_dg.png');
+                //     }
+                //     $('#up_now_speed').text(new_uday);
+                //     $('#up_spend_day').text(isvip_jday);
+                // }
             }
             $("#Result_end").hide();
             $("#Result_end").slideDown();
